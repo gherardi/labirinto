@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Labirinto JS</title>
+		<link rel="stylesheet" href="src/index.css" />
+		<script type="module" defer src="src/main.js"></script>
+	</head>
+	<body class="h-screen bg-slate-800 transition dark:bg-gray-50">
+		<div
+			id="themeSwitcher"
+			class="fixed left-3 bottom-3 z-20 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full"
+		>
+			<svg
+				class="moon hidden h-8 w-8"
+				fill="rgb(30 41 59)"
+				stroke="rgb(30 41 59)"
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+				></path>
+			</svg>
+			<svg
+				class="sun h-8 w-8"
+				fill="rgb(249 250 251)"
+				stroke="rgb(249 250 251)"
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+				></path>
+			</svg>
+		</div>
+
+		<div id="start" class="flex h-full flex-col items-center justify-center gap-12 px-4 text-white">
+			<h1
+				class="opacity-0 duration-700 transition bg-gradient-to-bl from-blue-500 to-violet-500 bg-clip-text py-5 text-5xl font-black text-transparent md:text-6xl"
+			>
+				Labirinto js
+			</h1>
+			<code
+				class="opacity-0 transition duration-700 text-md max-w-xl rounded bg-stone-50 px-8 py-5 text-slate-900 shadow-lg md:text-lg"
+			>
+				un labirinto creato interamente con
+				<a
+					href="https://it.wikipedia.org/wiki/JavaScript"
+					target="_blank"
+					class="underline decoration-yellow-300 decoration-4"
+					>javascript</a
+				>
+				e con il framework
+				<a
+					href="https://tailwindcss.com/"
+					target="_blank"
+					class="underline decoration-sky-400 decoration-4"
+					>tailwind css</a
+				>
+				per lo stile
+			</code>
+			<button
+				id="btnStart"
+				class="opacity-0 duration-500 transition rounded bg-blue-700 px-10 py-4 text-xl font-bold tracking-wider shadow-md shadow-blue-700/30 hover:translate-x-2 md:text-2xl"
+			>
+				Inizia a giocare ->
+			</button>
+		</div>
+
+		<div
+			id="map"
+			class="transition z-10 hidden w-full grid-cols-8 overflow-hidden rounded-md bg-gray-50 p-2 md:absolute md:right-0 md:m-5 md:max-w-md md:p-0"
+		>
+			<div class="cell connector-x before:-right-1"></div>
+			<div class="cell connector-x before:-right-1"></div>
+			<div class="cell connector-y before:-bottom-1"></div>
+			<div class="cell connector-x before:-right-1"></div>
+			<div class="cell connector-x before:-right-1"></div>
+			<div class="cell connector-y before:-bottom-1"></div>
+			<div class="cell connector-y before:-bottom-1"></div>
+			<div class="cell connector-x before:-left-1"></div>
+			<!-- ---------------------------------------------------------- -->
+			<div class="cell connector-y before:-bottom-1"></div>
+			<div class="cell connector-y before:-top-1"></div>
+			<div class="cell connector-x before:-right-1"></div>
+			<div class="cell connector-y before:-top-1"></div>
+			<div class="cell connector-y before:-top-1"></div>
+			<div class="cell connector-y before:-bottom-1"></div>
+			<div class="cell connector-y before:-bottom-1"></div>
+			<div
+				class="cell connector-y before:-top-1 after:absolute after:top-1/2 after:-right-1 after:z-10 after:h-4 after:w-2 after:-translate-y-1/2 after:bg-gray-50"
+			></div>
+			<!-- ---------------------------------------------------------- -->
+			<div class="cell connector-x before:-right-1"></div>
+			<div class="cell connector-y before:-top-1"></div>
+			<div class="cell connector-y before:-top-1"></div>
+			<div class="cell connector-y before:-bottom-1"></div>
+			<div class="cell connector-x before:-left-1"></div>
+			<div class="cell connector-x before:-left-1"></div>
+			<div class="cell connector-x before:-right-1"></div>
+			<div class="cell connector-y before:-bottom-1"></div>
+			<!-- ---------------------------------------------------------- -->
+			<div class="cell connector-y before:-top-1"></div>
+			<div class="cell connector-x before:-left-1"></div>
+			<div class="cell connector-x before:-left-1"></div>
+			<div class="cell connector-x before:-left-1"></div>
+			<div class="cell connector-y before:-top-1"></div>
+			<div class="cell connector-x before:-left-1"></div>
+			<div class="cell connector-x before:-left-1"></div>
+			<div class="cell connector-y before:-bottom-1"></div>
+			<!-- ---------------------------------------------------------- -->
+			<div class="cell connector-y before:-top-1"></div>
+			<div class="cell connector-x before:-right-1"></div>
+			<div class="cell connector-y before:-top-1"></div>
+			<div class="cell connector-x before:-right-1"></div>
+			<div class="cell connector-x before:-right-1"></div>
+			<div class="cell connector-x before:-right-1"></div>
+			<div class="cell connector-y before:-top-1"></div>
+			<div class="cell connector-x before:-left-1"></div>
+		</div>
+
+		<div id="ui" class="hidden h-4/6 grid-cols-11 md:h-screen">
+			<div class="wall left-wall transition"></div>
+
+			<div class="wall center-wall transition"></div>
+
+			<div class="wall right-wall transition"></div>
+		</div>
+
+		<div
+			id="mapSwitcher"
+			class="hidden fixed left-3 top-3 z-20 h-16 w-16 cursor-pointer items-center justify-center rounded-full"
+		>
+			<svg
+				class="w-10 h-10 stroke-gray-50 dark:stroke-slate-800 transition"
+				fill="none"
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+				></path>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+				></path>
+			</svg>
+		</div>
+
+		<div
+			id="winBanner"
+			class="relative hidden h-full flex-col items-center justify-center gap-16 overflow-hidden px-4 text-gray-50 dark:text-slate-800"
+		>
+			<h1 class="text-4xl font-black tracking-wider md:text-7xl">Hai vinto il gioco!</h1>
+			<div class="grid w-full max-w-lg grid-cols-3 gap-y-5 text-2xl">
+				<div class="col-span-2 flex items-center gap-3 font-black">
+					<svg
+						class="h-6 w-6 stroke-gray-50 dark:stroke-slate-800"
+						fill="none"
+						viewBox="0 0 24 24"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+						></path>
+					</svg>
+					Movimenti
+				</div>
+				<div id="movementsEl">34</div>
+				<div class="col-span-2 flex items-center gap-3 font-black">
+					<svg
+						class="h-6 w-6 stroke-gray-50 dark:stroke-slate-800"
+						fill="none"
+						viewBox="0 0 24 24"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M14.121 15.536c-1.171 1.952-3.07 1.952-4.242 0-1.172-1.953-1.172-5.119 0-7.072 1.171-1.952 3.07-1.952 4.242 0M8 10.5h4m-4 3h4m9-1.5a9 9 0 11-18 0 9 9 0 0118 0z"
+						></path>
+					</svg>
+					Monete
+				</div>
+				<div id="coinCounterEl">4 / 6</div>
+				<div class="col-span-2 flex items-center gap-3 font-black">
+					<svg
+						class="h-6 w-6 stroke-gray-50 dark:stroke-slate-800"
+						fill="none"
+						viewBox="0 0 24 24"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+						></path>
+					</svg>
+					Tempo impiegato
+				</div>
+				<div id="timeEl">45 s</div>
+			</div>
+			<img
+				src="/bg-labirinto.png"
+				alt=""
+				class="absolute -z-10 h-screen w-screen object-cover opacity-10"
+			/>
+		</div>
+	</body>
+</html>
