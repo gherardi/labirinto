@@ -1,2 +1,1 @@
-
-<a href="https://example.com" target="_blank">Visit Example</a>
+[Visit Example](https://example.com){:target="_blank"}
